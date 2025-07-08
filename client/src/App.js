@@ -1,33 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import Signup from "./Signup";
 import Login from "./Login";
 
 function App() {
-  const [token, setToken] = useState(localStorage.getItem("token"));
-
   return (
     <div style={styles.wrapper}>
-      <h1 style={styles.header}>🔥 Mini MERN Auth App 🔐</h1>
-      {!token ? (
-        <>
-          <Signup />
-          <hr style={styles.hr} />
-          <Login setToken={setToken} />
-        </>
-      ) : (
-        <div>
-          <h2>✅ Logged in!</h2>
-          <p>JWT Token stored in localStorage</p>
-          <button
-            onClick={() => {
-              localStorage.removeItem("token");
-              setToken(null);
-            }}
-          >
-            Logout
-          </button>
-        </div>
-      )}
+      <h1 style={styles.header}>Hello, frontend is NOT blank! 🚀</h1>
+      <Signup />
+      <hr style={styles.hr} />
+      <Login setToken={() => {}} />
     </div>
   );
 }
