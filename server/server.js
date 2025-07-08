@@ -14,6 +14,10 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("Mongo connected"))
   .catch(err => console.log("Mongo error: ", err));
 
+  app.get("/", (req, res) => {
+    res.send("✅ Backend is live.");
+  });
+
 app.listen(5000, () => {
   console.log("Server running on http://localhost:5000");
 });
