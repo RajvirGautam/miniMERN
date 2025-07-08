@@ -1,35 +1,35 @@
 import React, { useState } from "react";
 
-function Login({ setToken }) {
+function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleLogin = async () => {
+  const handleSignup = async () => {
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_BASE}/api/login`, {
+      const res = await fetch(`${process.env.REACT_APP_API_BASE}/api/signup`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ username, password }),
       });
 
       const data = await res.json();
-      if (res.ok && data.token) {
-        localStorage.setItem("token", data.token);
-        setToken(data.token); // Pass token back to App.js
-        setMessage("✅ Login successful!");
+      if (res.ok) {
+        setMessage("✅ Signup successful!");
       } else {
-        setMessage(`❌ ${data.msg || "Login failed"}`);
+        setMessage(`❌ ${data.msg}`);
       }
     } catch (err) {
+      setMessage("❌ Signup failed. Server error.");
       console.error(err);
-      setMessage("❌ Server error during login");
     }
   };
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2>Signup</h2>
       <input
         type="text"
         placeholder="username"
@@ -42,10 +42,10 @@ function Login({ setToken }) {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       /><br />
-      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleSignup}>Signup</button>
       <p>{message}</p>
     </div>
   );
 }
 
-export default Login;
+export default Signup;
